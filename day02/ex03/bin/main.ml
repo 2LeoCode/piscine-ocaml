@@ -1,5 +1,4 @@
 open Ex03.Sequence
-open Printf
 
 let ( %> ) f g x = x |> f |> g
 let print_case = sequence %> print_endline

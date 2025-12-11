@@ -1,6 +1,7 @@
 open Ex08.Life
 open Ex08.Ribosome
 
+let ( %> ) f g x = x |> f |> g
 let print_case = generate_protein %> string_of_protein %> print_endline
 
 let () =

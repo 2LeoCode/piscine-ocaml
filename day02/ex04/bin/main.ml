@@ -4,7 +4,7 @@ open Printf
 let ( %> ) f g x = x |> f |> g
 
 let print_nucleotide (ph, de, base) =
-  Printf.printf "%s %s %s\n" ph de
+  printf "%s %s %s\n" ph de
     (match base with
     | Ex04.Nucleotides.A -> "A"
     | Ex04.Nucleotides.T -> "T"

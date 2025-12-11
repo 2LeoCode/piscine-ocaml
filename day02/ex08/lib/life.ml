@@ -1,4 +1,2 @@
-let ( %> ) f g x = x |> f |> g
-
-let generate_protein =
-  Helix._helix_of_string %> Rna.generate_rna %> Ribosome.decode_arn
+let generate_protein repr =
+  repr |> Helix.string_to_helix |> Rna.generate_rna |> Ribosome.decode_arn

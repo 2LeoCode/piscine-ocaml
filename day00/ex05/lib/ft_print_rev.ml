@@ -5,7 +5,7 @@ let _explode s =
     | i when i < 0 -> []
     | i -> s.[i] :: (explode' [@tailcall]) (i - 1)
   in
-  explode' (String.length s - 1)
+  (s |> String.length) - 1 |> explode'
 
 let _implode l =
   let len = List.length l in
