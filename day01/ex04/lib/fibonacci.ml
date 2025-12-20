@@ -8,3 +8,11 @@ let fibonacci = function
         | i -> (fibonacci' [@tailcall]) b (a + b) (i + 1)
       in
       fibonacci' 0 1 2
+
+let () =
+  let print_case x = x |> fibonacci |> Printf.printf "%d\n" in
+
+  print_case (-42);
+  print_case 1;
+  print_case 3;
+  print_case 6
