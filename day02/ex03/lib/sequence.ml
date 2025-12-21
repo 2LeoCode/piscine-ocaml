@@ -19,8 +19,31 @@ let sequence n =
 
   if n < 0 then ""
   else
+    (* let rec sequence' prev = function *)
+    (*   | 0 -> prev *)
+    (*   | i -> sequence' (encode prev) (i - 1) *)
+    (* in *)
+    (* sequence' [ 1 ] n |> string_of_encoded *)
     let rec sequence' prev = function
       | 0 -> prev
-      | i -> sequence' (encode prev) (i - 1)
+      | n ->
+        let rec sequence'' = () in
+
+        sequence'':Wq 
     in
-    sequence' [ 1 ] n |> string_of_encoded
+
+    sequence' "1" n
+
+let () =
+  let print_case x = x |> sequence |> print_endline in
+
+  print_case 0;
+  print_case 1;
+  print_case 2;
+  print_case 3;
+  print_case 4;
+  print_case 5;
+  print_case 6;
+  print_case 7;
+  print_case 8;
+  print_case 9
