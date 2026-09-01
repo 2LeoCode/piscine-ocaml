@@ -1,12 +1,12 @@
 type rna = Nucleotides.nucleobase list
 
-let _rna_to_string =
-  let rec _rna_to_string acc = function
+let string_of_rna =
+  let rec string_of_rna acc = function
     | [] -> acc
     | head :: rest ->
-        _rna_to_string (Nucleotides.string_of_nucleobase head ^ acc) rest
+        string_of_rna (Nucleotides.string_of_nucleobase head ^ acc) rest
   in
-  _rna_to_string ""
+  string_of_rna ""
 
 let[@tail_mod_cons] rec generate_rna : Helix.helix -> rna = function
   | [] -> []
@@ -19,3 +19,9 @@ let[@tail_mod_cons] rec generate_rna : Helix.helix -> rna = function
       | Nucleotides.G -> Nucleotides.C
       | Nucleotides.None -> Nucleotides.None)
       :: (generate_rna [@tailcall]) rest
+
+let () =
+  let a = Helix.generate_helix 20 in
+  let b = generate_rna a in
+  Helix.string_of_helix a |> print_endline;
+  string_of_rna b |> print_endline

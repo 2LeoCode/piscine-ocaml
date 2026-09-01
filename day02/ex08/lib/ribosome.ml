@@ -23,7 +23,7 @@ type aminoacid =
   | Tyr
   | Val
 
-let _string_of_aminoacid = function
+let string_of_aminoacid = function
   | Stop -> "End of translation"
   | Ala -> "Alanine"
   | Arg -> "Arginine"
@@ -55,16 +55,16 @@ let[@tail_mod_cons] rec generate_base_triplets :
   | _ -> []
 
 let string_of_protein =
-  let rec string_of_protein' acc = function
+  let rec string_of_protein acc = function
     | [] -> acc
     | head :: rest ->
-        (string_of_protein' [@tailcall])
-          (acc ^ ", " ^ _string_of_aminoacid head)
+        (string_of_protein [@tailcall])
+          (acc ^ ", " ^ string_of_aminoacid head)
           rest
   in
   function
   | [] -> ""
-  | head :: rest -> string_of_protein' (_string_of_aminoacid head) rest
+  | head :: rest -> string_of_protein (string_of_aminoacid head) rest
 
 let decode_arn arn : protein =
   let[@tail_mod_cons] rec decode_base_triplets = function

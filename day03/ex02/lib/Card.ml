@@ -133,3 +133,10 @@ let isSpade x = isOf x Color.Spade
 let isHeart x = isOf x Color.Heart
 let isDiamond x = isOf x Color.Diamond
 let isClub x = isOf x Color.Club
+
+let () =
+  let print_case x =
+    Printf.printf "%s : %s\n" (toString x) (toStringVerbose x)
+  in
+
+  all |> List.iter print_case

@@ -15,15 +15,15 @@ let gray n =
       (print_bits [@tailcall]) x (n - 1))
   in
 
-  let rec gray' x =
+  let rec gray x =
     let v = x lxor (x lsr 1) in
     print_bits v n;
     if msb v <> n then (
       print_char ' ';
-      (gray' [@tailcall]) (x + 1))
+      (gray [@tailcall]) (x + 1))
   in
 
-  gray' 0;
+  gray 0;
   print_newline ()
 
 let () =

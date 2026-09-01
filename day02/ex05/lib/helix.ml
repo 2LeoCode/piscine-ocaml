@@ -1,26 +1,27 @@
 type helix = Nucleotides.nucleotide list
 
+let nucleobase_charset = "ATCG."
+
 let generate_helix : int -> helix =
-  let nucleobase_charset = "ATCG." in
   Random.self_init ();
-  let[@tail_mod_cons] rec generate_helix' = function
+  let[@tail_mod_cons] rec generate_helix = function
     | 0 -> []
     | n ->
         Nucleotides.generate_nucleotide nucleobase_charset.[Random.int 5]
-        :: (generate_helix' [@tailcall]) (n - 1)
+        :: (generate_helix [@tailcall]) (n - 1)
   in
-  generate_helix'
+  generate_helix
 
-let helix_to_string : helix -> string =
-  let rec helix_to_string' acc = function
+let string_of_helix : helix -> string =
+  let rec string_of_helix acc = function
     | [] -> acc
     | (_, _, base) :: rest ->
-        (helix_to_string' [@tailcall])
+        (string_of_helix [@tailcall])
           (Nucleotides.string_of_nucleobase base ^ acc)
           rest
   in
 
-  helix_to_string' ""
+  string_of_helix ""
 
 let[@tail_mod_cons] rec complementary_helix : helix -> helix = function
   | [] -> []
@@ -34,3 +35,9 @@ let[@tail_mod_cons] rec complementary_helix : helix -> helix = function
         | Nucleotides.G -> Nucleotides.C
         | Nucleotides.None -> Nucleotides.None )
       :: (complementary_helix [@tailcall]) rest
+
+let () =
+  let a = generate_helix 20 in
+  let b = complementary_helix a in
+  string_of_helix a |> print_endline;
+  string_of_helix b |> print_endline

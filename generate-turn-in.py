@@ -16,5 +16,5 @@ try:
     print('Done.')
 
         
-except e:
+except Exception as e:
     print(f"Failed to extract turn-in files for day {day_no}: {e}")

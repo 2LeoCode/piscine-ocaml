@@ -68,3 +68,18 @@ let previous x =
     | _ :: rest -> (previous' [@tailcall]) rest
   in
   previous' all
+
+let () =
+  let print_case x =
+    Printf.printf
+      "toInt: %d\n\
+       toString: %s\n\
+       toStringVerbose: %s\n\
+       next.toString: %s\n\
+       previous.toString: %s\n"
+      (toInt x) (toString x) (toStringVerbose x)
+      (try x |> next |> toString with Invalid_argument msg -> msg)
+      (try x |> previous |> toString with Invalid_argument msg -> msg)
+  in
+
+  all |> List.iter print_case

@@ -1,0 +1,4 @@
+(executable
+ (public_name ex08)
+ (name main)
+ (libraries ex08))

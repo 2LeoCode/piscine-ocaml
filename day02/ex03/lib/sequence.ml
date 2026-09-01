@@ -1,38 +1,27 @@
 let sequence n =
-  let encode =
-    let[@tail_mod_cons] rec encode' n = function
-      | [] -> []
-      | head :: next :: rest when head = next ->
-          (encode' [@tailcall]) (n + 1) (next :: rest)
-      | head :: rest -> head :: n :: (encode' [@tailcall]) 1 rest
-    in
-    encode' 1
-  in
-
-  let string_of_encoded =
-    let rec string_of_encoded' acc = function
-      | [] -> acc
-      | head :: rest -> string_of_encoded' (string_of_int head ^ acc) rest
-    in
-    string_of_encoded' ""
-  in
-
-  if n < 0 then ""
+  if n <= 0 then ""
   else
-    (* let rec sequence' prev = function *)
-    (*   | 0 -> prev *)
-    (*   | i -> sequence' (encode prev) (i - 1) *)
-    (* in *)
-    (* sequence' [ 1 ] n |> string_of_encoded *)
-    let rec sequence' prev = function
+    let rec sequence prev = function
       | 0 -> prev
-      | n ->
-        let rec sequence'' = () in
+      | i ->
+          let rec next_diff = function
+            | i when i = String.length prev -> i
+            | i when prev.[i - 1] = prev.[i] -> next_diff (i + 1)
+            | i -> i
+          in
 
-        sequence'':Wq 
+          let rec next_sequence next = function
+            | i when i = String.length prev -> next
+            | i ->
+                let c = prev.[i] in
+                let n = next_diff (i + 1) - i in
+                next_sequence (next ^ string_of_int n ^ String.make 1 c) (i + n)
+          in
+
+          (next_sequence "" 0 |> sequence) (i - 1)
     in
 
-    sequence' "1" n
+    sequence "1" (n - 1)
 
 let () =
   let print_case x = x |> sequence |> print_endline in
@@ -46,4 +35,5 @@ let () =
   print_case 6;
   print_case 7;
   print_case 8;
-  print_case 9
+  print_case 9;
+  print_case 20
