@@ -1,14 +1,14 @@
-let[@tail_mod_cons] rec crossover l =
-  let rec list_contains v = function
+let[@tail_mod_cons] rec crossover l1 l2 =
+  let rec list_has v = function
     | [] -> false
-    | head :: rest -> head = v || (list_contains [@tailcall]) v rest
+    | head :: rest -> head = v || (list_has [@tailcall]) v rest
   in
 
-  function
+  match l2 with
   | [] -> []
-  | head :: rest when list_contains head l ->
-      head :: (crossover [@tailcall]) l rest
-  | _ :: rest -> (crossover [@tailcall]) l rest
+  | head :: rest when list_has head l1 ->
+      head :: (crossover [@tailcall]) l1 rest
+  | _ :: rest -> (crossover [@tailcall]) l1 rest
 
 let () =
   let print_int_list l =

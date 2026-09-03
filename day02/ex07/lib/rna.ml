@@ -1,3 +1,4 @@
+type nucleobase = Nucleotides.nucleobase = A | T | C | G | U | None
 type rna = Nucleotides.nucleobase list
 
 let string_of_rna =
@@ -12,10 +13,10 @@ let[@tail_mod_cons] rec generate_rna : Helix.helix -> rna = function
   | [] -> []
   | (_, _, base) :: rest ->
       (match base with
-      | Nucleotides.A -> Nucleotides.U
-      | Nucleotides.U -> Nucleotides.T
-      | Nucleotides.T -> Nucleotides.A
-      | Nucleotides.C -> Nucleotides.G
-      | Nucleotides.G -> Nucleotides.C
-      | Nucleotides.None -> Nucleotides.None)
+      | A -> U
+      | U -> T
+      | T -> A
+      | C -> G
+      | G -> C
+      | None -> None)
       :: (generate_rna [@tailcall]) rest

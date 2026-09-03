@@ -1,3 +1,4 @@
+type nucleobase = Nucleotides.nucleobase = A | T | C | G | U | None
 type helix = Nucleotides.nucleotide list
 
 let nucleobase_charset = "ATCGU."
@@ -28,10 +29,10 @@ let[@tail_mod_cons] rec complementary_helix : helix -> helix = function
       ( ph,
         de,
         match base with
-        | Nucleotides.A -> Nucleotides.T
-        | Nucleotides.T -> Nucleotides.A
-        | Nucleotides.C -> Nucleotides.G
-        | Nucleotides.G -> Nucleotides.C
-        | Nucleotides.U -> Nucleotides.U
-        | Nucleotides.None -> Nucleotides.None )
+        | A -> T
+        | T -> A
+        | C -> G
+        | G -> C
+        | U -> U
+        | None -> None )
       :: (complementary_helix [@tailcall]) rest
