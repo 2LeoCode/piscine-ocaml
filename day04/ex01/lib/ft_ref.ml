@@ -2,7 +2,7 @@ type 'a ft_ref = { mutable value : 'a }
 
 let return value = { value }
 let get { value } = value
-let set self newValue = ignore (self.value <- newValue)
+let set self newValue = self.value <- newValue
 let bind { value } cb = return (cb value)
 
 let () =

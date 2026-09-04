@@ -8,7 +8,8 @@ let main () =
       with Sys_error e -> Stdlib.failwith ("Failed to read jokes file: " ^ e)
     in
 
-    while true do
+    let should_quit = ref false in
+    while not !should_quit do
       match try read_line () with End_of_file -> exit 0 with
       | "add" ->
           print_string "Enter the joke to add: ";
@@ -40,7 +41,19 @@ let main () =
                   !jokes);
             print_endline "Jokes succesfully saved !"
           with Sys_error e -> print_endline ("Failed to save jokes: " ^ e))
-      | cmd -> print_endline ("Unknown command: '" ^ cmd ^ "'")
+      | "quit" -> should_quit := true
+      | "help" ->
+          print_endline
+            "add: add a joke\n\
+             del: delete a joke\n\
+             tell: randomly pick a saved joke and print it\n\
+             save: update jokes file with changes\n\
+             help: show this help message\n\
+             quit: quit the program"
+      | cmd ->
+          print_endline
+            ("Unknown command: '" ^ cmd
+           ^ "', type `help` to see available commands.")
     done)
 
 let () = main ()
