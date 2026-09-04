@@ -28,28 +28,26 @@ functor
       | Value v -> v
   end
 
-module MakeVal (Val : VAL) = Val
-
-module IntVal = MakeVal (struct
+module IntVal = struct
   type t = int
 
   let add = ( + )
   let mul = ( * )
-end)
+end
 
-module FloatVal = MakeVal (struct
+module FloatVal = struct
   type t = float
 
   let add = ( +. )
   let mul = ( *. )
-end)
+end
 
-module StringVal = MakeVal (struct
+module StringVal = struct
   type t = string
 
   let add s1 s2 = if String.length s1 > String.length s2 then s1 else s2
   let mul = ( ^ )
-end)
+end
 
 module IntEvalExpr = MakeEvalExpr (IntVal)
 module FloatEvalExpr = MakeEvalExpr (FloatVal)
