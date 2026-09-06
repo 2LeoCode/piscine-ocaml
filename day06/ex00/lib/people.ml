@@ -1,5 +1,5 @@
 class people (name : string) =
-  object (self)
+  object
     val name = name
     val mutable hp = 100
     initializer print_endline (name ^ " has been born")

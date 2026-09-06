@@ -9,7 +9,7 @@ class dalek =
       "You are the Doctor! You are the enemy of the Daleks!";
     |]
   in
-  object (self)
+  object
     val name =
       let random_char_string start n length =
         let rec random_char_string' acc = function

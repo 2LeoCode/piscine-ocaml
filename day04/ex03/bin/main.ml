@@ -1,1 +1,1 @@
-let () = ignore Ex03.Jokes.main
+let () = ignore Ex03.Jokes.jokes

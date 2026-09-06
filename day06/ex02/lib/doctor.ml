@@ -1,5 +1,5 @@
 class doctor (name : string) (sidekick : People.people) =
-  object (self)
+  object
     val name = name
     val mutable age = 0
     val mutable sidekick = sidekick
